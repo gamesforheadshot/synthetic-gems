@@ -1,0 +1,2289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthetic Gems — Premium Lab-Created Gemstones</title>
+    <link href="https://fontsource.fonts.lato/css/300,400,700,900.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #c9a96e;
+            --gold-light: #e2cc9c;
+            --gold-dark: #a07d3f;
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a26;
+            --text-primary: #f5f0e8;
+            --text-secondary: #a09888;
+            --text-muted: #6b6358;
+            --accent-ruby: #e0115f;
+            --accent-sapphire: #0f52ba;
+            --accent-emerald: #00a86b;
+            --accent-diamond: #e8e0d4;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(0px);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.92);
+            backdrop-filter: blur(20px);
+            padding: 0.75rem 3rem;
+            border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-logo svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-logo-text span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.6rem 1.5rem !important;
+            border: 1px solid var(--gold) !important;
+            color: var(--gold) !important;
+            border-radius: 2px;
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold) !important;
+            color: var(--bg-primary) !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            width: 28px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.3) saturate(0.8);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 10, 15, 0.4) 0%,
+                rgba(10, 10, 15, 0.6) 50%,
+                rgba(10, 10, 15, 1) 100%
+            );
+            z-index: 1;
+        }
+
+        #sparkle-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            border: 1px solid rgba(201, 169, 110, 0.3);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s 0.3s forwards;
+        }
+
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s 0.5s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s 0.7s forwards;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s 0.9s forwards;
+        }
+
+        .btn-primary {
+            padding: 1rem 2.5rem;
+            background: var(--gold);
+            color: var(--bg-primary);
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 169, 110, 0.3);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid rgba(245, 240, 232, 0.2);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s 1.2s forwards;
+        }
+
+        .hero-scroll span {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollPulse 2s infinite;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 8rem 3rem;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .divider-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 1.5rem auto;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-secondary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-image-overlay {
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(201, 169, 110, 0.2);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text h3 em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            font-weight: 300;
+            line-height: 1.9;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(201, 169, 110, 0.15);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.25rem;
+        }
+
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(201, 169, 110, 0.08);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            group: true;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201, 169, 110, 0.25);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 15, 0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .product-card:hover .product-image-overlay {
+            opacity: 1;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.3rem 0.75rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            z-index: 2;
+        }
+
+        .badge-new {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        .badge-popular {
+            background: var(--accent-ruby);
+            color: white;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .product-type {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .product-price span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--bg-secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            background: var(--bg-tertiary);
+            border: 1px solid rgba(201, 169, 110, 0.06);
+            border-radius: 4px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(201, 169, 110, 0.15);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .feature-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .feature-icon-bg {
+            position: absolute;
+            inset: 0;
+            background: rgba(201, 169, 110, 0.08);
+            border-radius: 50%;
+        }
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Process Section */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 12.5%;
+            right: 12.5%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dark), var(--gold-dark), transparent);
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--gold-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+
+        .process-step:hover .step-number {
+            background: var(--gold);
+            color: var(--bg-primary);
+            box-shadow: 0 0 30px rgba(201, 169, 110, 0.3);
+        }
+
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--bg-secondary);
+        }
+
+        .testimonials-slider {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            padding: 2.5rem;
+            background: var(--bg-tertiary);
+            border: 1px solid rgba(201, 169, 110, 0.06);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 3rem;
+            color: var(--gold-dark);
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .testimonial-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .testimonial-stars {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            position: relative;
+            padding: 8rem 3rem;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .cta-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .cta-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.2);
+        }
+
+        .cta-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, var(--bg-primary), rgba(10, 10, 15, 0.7), var(--bg-primary));
+            z-index: 1;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content h2 em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .cta-content p {
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--bg-secondary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(201, 169, 110, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-item-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .contact-item-text strong {
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item-text span {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.875rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid rgba(201, 169, 110, 0.1);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--gold);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a09888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+
+        .form-submit {
+            align-self: flex-start;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 3rem 2rem;
+            background: var(--bg-primary);
+            border-top: 1px solid rgba(201, 169, 110, 0.08);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-top: 1rem;
+            max-width: 300px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(201, 169, 110, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .footer-social a:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .footer-social a svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--text-secondary);
+            transition: fill 0.3s;
+        }
+
+        .footer-social a:hover svg {
+            fill: var(--bg-primary);
+        }
+
+        .footer-col h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-col a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 300;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-bottom-links a {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 1; transform: scaleY(1); }
+            50% { opacity: 0.5; transform: scaleY(0.6); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 15, 0.98);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--gold);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 15, 0.9);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(201, 169, 110, 0.15);
+            border-radius: 8px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(201, 169, 110, 0.2);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+            font-size: 1.25rem;
+        }
+
+        .modal-close:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-product-type {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .modal-product-desc {
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-product-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .spec-item {
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+        }
+
+        .spec-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .spec-value {
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        .modal-product-price {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-actions .btn-primary {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .modal-actions .btn-secondary {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 3000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            color: var(--gold);
+            font-size: 1.25rem;
+        }
+
+        .toast-message {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 5rem 1.5rem;
+            }
+
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .navbar.scrolled {
+                padding: 0.75rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-image img {
+                height: 300px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .testimonials-slider {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.75rem;
+            }
+
+            .modal-product-specs {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">
+            <svg viewBox="0 0 36 36" fill="none">
+                <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+                <path d="M18 2L32 10L18 18L4 10L18 2Z" fill="rgba(201,169,110,0.15)"/>
+                <path d="M18 18V34" stroke="#c9a96e" stroke-width="1"/>
+                <path d="M4 10L18 18L32 10" stroke="#c9a96e" stroke-width="1"/>
+                <path d="M11 14L18 18L25 14" stroke="#c9a96e" stroke-width="0.75" opacity="0.5"/>
+            </svg>
+            <span class="nav-logo-text">Synthetic<span>Gems</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#technology">Technology</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact" class="nav-cta">Get Quote</a></li>
+        </ul>
+        <div class="mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" onclick="closeMobile()">About</a>
+        <a href="#collection" onclick="closeMobile()">Collection</a>
+        <a href="#technology" onclick="closeMobile()">Technology</a>
+        <a href="#reviews" onclick="closeMobile()">Reviews</a>
+        <a href="#contact" onclick="closeMobile()">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/153d6db8d-5c14-4acb-a69d-e8324a5b7a01.png" alt="Synthetic Gems Collection">
+        </div>
+        <div class="hero-overlay"></div>
+        <canvas id="sparkle-canvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Lab-Created Excellence Since 1987
+            </div>
+            <h1 class="hero-title">The Art of <em>Synthetic</em><br>Gemstone Creation</h1>
+            <p class="hero-subtitle">Discover the pinnacle of gemological science — flawless, ethically created gemstones that rival nature's finest masterpieces in brilliance and beauty.</p>
+            <div class="hero-actions">
+                <a href="#collection" class="btn-primary">
+                    Explore Collection
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#technology" class="btn-secondary">Our Technology</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <img src="https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/1f5548961-0055-461d-8919-1aaf6f240f90.png" alt="Lab Technology">
+                    <div class="about-image-overlay"></div>
+                </div>
+                <div class="about-text reveal reveal-delay-2">
+                    <span class="section-label">About Us</span>
+                    <h3>Pioneering the Future of <em>Gemstone</em> Science</h3>
+                    <p>For over three decades, Synthetic Gems has been at the forefront of lab-created gemstone innovation. Our state-of-the-art facilities combine cutting-edge technology with masterful craftsmanship to produce gemstones indistinguishable from their natural counterparts.</p>
+                    <p>Every gemstone we create undergoes rigorous quality control, ensuring exceptional clarity, color saturation, and cut precision. We are committed to providing sustainable, ethically-sourced alternatives that don't compromise on beauty.</p>
+                    <div class="about-stats">
+                        <div>
+                            <span class="stat-number" data-target="35">0</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div>
+                            <span class="stat-number" data-target="50000">0</span>
+                            <span class="stat-label">Gems Created</span>
+                        </div>
+                        <div>
+                            <span class="stat-number" data-target="99">0</span>
+                            <span class="stat-label">% Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Section -->
+    <section class="section" id="collection">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-label">Our Collection</span>
+                <h2 class="section-title">Exquisite Synthetic Gemstones</h2>
+                <div class="divider-line"></div>
+                <p class="section-desc">Each gemstone is meticulously crafted using advanced crystal growth techniques, resulting in exceptional quality and brilliance.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card reveal reveal-delay-1" onclick="openModal('ruby')">
+                    <div class="product-image">
+                        <span class="product-badge badge-popular">Popular</span>
+                        <img src="https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/1161372ef-be17-4cb1-9d43-7790778d3735.png" alt="Synthetic Ruby">
+                        <div class="product-image-overlay"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Synthetic Ruby</h3>
+                        <p class="product-type">Verneuil Process</p>
+                        <div class="product-price">$245 <span>/ carat</span></div>
+                    </div>
+                </div>
+                <div class="product-card reveal reveal-delay-2" onclick="openModal('sapphire')">
+                    <div class="product-image">
+                        <span class="product-badge badge-new">New</span>
+                        <img src="https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/1c42bedde-68bc-44c0-80d0-dc389f58b415.png" alt="Synthetic Sapphire">
+                        <div class="product-image-overlay"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Synthetic Sapphire</h3>
+                        <p class="product-type">Czochralski Method</p>
+                        <div class="product-price">$320 <span>/ carat</span></div>
+                    </div>
+                </div>
+                <div class="product-card reveal reveal-delay-3" onclick="openModal('emerald')">
+                    <div class="product-image">
+                        <img src="https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/1deb23d7f-ea43-41cd-9eca-363986822ef4.png" alt="Synthetic Emerald">
+                        <div class="product-image-overlay"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Synthetic Emerald</h3>
+                        <p class="product-type">Flux Growth</p>
+                        <div class="product-price">$480 <span>/ carat</span></div>
+                    </div>
+                </div>
+                <div class="product-card reveal reveal-delay-4" onclick="openModal('diamond')">
+                    <div class="product-image">
+                        <span class="product-badge badge-new">New</span>
+                        <img src="https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/171054ae5-08c3-4767-8258-b97ee0d49dd8.png" alt="Synthetic Diamond">
+                        <div class="product-image-overlay"></div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Synthetic Diamond</h3>
+                        <p class="product-type">CVD / HPHT</p>
+                        <div class="product-price">$550 <span>/ carat</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology / Process Section -->
+    <section class="section features" id="technology">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-label">Our Technology</span>
+                <h2 class="section-title">Advanced Crystal Growth Methods</h2>
+                <div class="divider-line"></div>
+                <p class="section-desc">We employ multiple state-of-the-art techniques to create gemstones of unparalleled quality and precision.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="feature-icon">
+                        <div class="feature-icon-bg"></div>
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3 class="feature-title">Flux Growth</h3>
+                    <p class="feature-desc">Our flux growth method dissolves gemstone materials in a flux solvent, slowly cooling to form crystals with exceptional clarity and natural-looking inclusions.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="feature-icon">
+                        <div class="feature-icon-bg"></div>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                    </div>
+                    <h3 class="feature-title">Hydrothermal Synthesis</h3>
+                    <p class="feature-desc">Simulating geological conditions under high pressure and temperature, creating emeralds and quartzes that are chemically identical to natural specimens.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-3">
+                    <div class="feature-icon">
+                        <div class="feature-icon-bg"></div>
+                        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <h3 class="feature-title">CVD Diamond Growth</h3>
+                    <p class="feature-desc">Chemical Vapor Deposition allows us to grow diamond crystals atom by atom, producing stones with superior optical properties and customizable characteristics.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="feature-icon">
+                        <div class="feature-icon-bg"></div>
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3 class="feature-title">Quality Certification</h3>
+                    <p class="feature-desc">Every gemstone comes with a detailed certification report including chemical composition, growth method, and grading by certified gemological laboratories.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="feature-icon">
+                        <div class="feature-icon-bg"></div>
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <h3 class="feature-title">Ethical Sourcing</h3>
+                    <p class="feature-desc">Our lab-created process eliminates environmental damage and ethical concerns associated with traditional mining, making every purchase guilt-free.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-3">
+                    <div class="feature-icon">
+                        <div class="feature-icon-bg"></div>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <h3 class="feature-title">Custom Orders</h3>
+                    <p class="feature-desc">From specific color grades to unique cuts and sizes, we offer bespoke gemstone creation tailored to your exact specifications and requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section" id="process">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-label">Our Process</span>
+                <h2 class="section-title">From Seed to Splendor</h2>
+                <div class="divider-line"></div>
+                <p class="section-desc">The journey of creating a perfect synthetic gemstone involves precision, patience, and passion.</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step reveal reveal-delay-1">
+                    <div class="step-number">01</div>
+                    <h4 class="step-title">Raw Material Selection</h4>
+                    <p class="step-desc">Ultra-pure chemical precursors are carefully selected and prepared for the crystal growth process.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-2">
+                    <div class="step-number">02</div>
+                    <h4 class="step-title">Crystal Growth</h4>
+                    <p class="step-desc">Seeds are placed in controlled environments where crystals grow slowly over weeks or months.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-3">
+                    <div class="step-number">03</div>
+                    <h4 class="step-title">Expert Cutting</h4>
+                    <p class="step-desc">Master cutters shape each rough crystal using precision instruments to maximize brilliance.</p>
+                </div>
+                <div class="process-step reveal reveal-delay-4">
+                    <div class="step-number">04</div>
+                    <h4 class="step-title">Quality Assurance</h4>
+                    <p class="step-desc">Final inspection under magnification ensures every stone meets our exacting standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials" id="reviews">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-label">Testimonials</span>
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="divider-line"></div>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-card reveal reveal-delay-1">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">The quality of synthetic rubies from Synthetic Gems is simply extraordinary. Our clients can't distinguish them from natural stones, and the price point makes luxury accessible.</p>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-author" style="margin-top: 1rem;">
+                        <div class="testimonial-avatar">MR</div>
+                        <div>
+                            <div class="testimonial-name">Margaret Reynolds</div>
+                            <div class="testimonial-role">Creative Director, Atelier Lumière</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal reveal-delay-2">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">We've been sourcing synthetic sapphires for over five years. The consistency in color and clarity is remarkable. Synthetic Gems has become an indispensable partner.</p>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-author" style="margin-top: 1rem;">
+                        <div class="testimonial-avatar">JK</div>
+                        <div>
+                            <div class="testimonial-name">James Kowalski</div>
+                            <div class="testimonial-role">Head Gemologist, Prestige Stones</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal reveal-delay-3">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">Their custom CVD diamonds have revolutionized our engagement ring collection. Ethically perfect, visually stunning, and our customers love the story behind each stone.</p>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-author" style="margin-top: 1rem;">
+                        <div class="testimonial-avatar">SC</div>
+                        <div>
+                            <div class="testimonial-name">Sarah Chen</div>
+                            <div class="testimonial-role">Founder, Ethereal Jewelry Co.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-bg">
+            <img src="https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/16df74be1-5b9b-4613-b158-940b1f0bb98e.png" alt="Luxury Background">
+        </div>
+        <div class="cta-overlay"></div>
+        <div class="cta-content reveal">
+            <span class="section-label">Ready to Start?</span>
+            <h2>Experience the <em>Brilliance</em> of Lab-Created Gems</h2>
+            <p>Whether you're a jeweler, collector, or designer, we have the perfect synthetic gemstone for your needs.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn-primary">
+                    Request a Catalog
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#collection" class="btn-secondary">View Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-label">Get In Touch</span>
+                <h2 class="section-title">Contact Us</h2>
+                <div class="divider-line"></div>
+                <p class="section-desc">Have questions about our synthetic gemstones? We'd love to hear from you.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h3>Let's Create Something Beautiful</h3>
+                    <p>Our team of gemological experts is ready to assist you in selecting the perfect synthetic gemstone for your project, collection, or custom order.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <strong>Visit Our Lab</strong>
+                                <span>1247 Crystal Drive, Suite 300<br>Richmond, CA 94804</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <strong>Call Us</strong>
+                                <span>+1 (510) 555-0147</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <strong>Email Us</strong>
+                                <span>info@syntheticgems.org</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            <div class="contact-item-text">
+                                <strong>Lab Hours</strong>
+                                <span>Mon — Fri: 9:00 AM — 6:00 PM<br>Sat: 10:00 AM — 4:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form reveal reveal-delay-2" id="contactForm" onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">Interest</label>
+                        <select id="interest" required>
+                            <option value="" disabled selected>Select your interest</option>
+                            <option value="ruby">Synthetic Rubies</option>
+                            <option value="sapphire">Synthetic Sapphires</option>
+                            <option value="emerald">Synthetic Emeralds</option>
+                            <option value="diamond">Synthetic Diamonds</option>
+                            <option value="custom">Custom Orders</option>
+                            <option value="wholesale">Wholesale / Bulk</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Tell us about your project or requirements..." required></textarea>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn-primary">
+                            Send Message
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo">
+                    <svg viewBox="0 0 36 36" fill="none" width="36" height="36">
+                        <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="#c9a96e" stroke-width="1.5" fill="none"/>
+                        <path d="M18 2L32 10L18 18L4 10L18 2Z" fill="rgba(201,169,110,0.15)"/>
+                        <path d="M18 18V34" stroke="#c9a96e" stroke-width="1"/>
+                        <path d="M4 10L18 18L32 10" stroke="#c9a96e" stroke-width="1"/>
+                    </svg>
+                    <span class="nav-logo-text">Synthetic<span>Gems</span></span>
+                </a>
+                <p>Pioneering the future of gemstone science with ethically created, lab-grown gemstones of exceptional quality since 1987.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#collection">Synthetic Rubies</a></li>
+                    <li><a href="#collection">Synthetic Sapphires</a></li>
+                    <li><a href="#collection">Synthetic Emeralds</a></li>
+                    <li><a href="#collection">Synthetic Diamonds</a></li>
+                    <li><a href="#contact">Custom Orders</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#process">Our Process</a></li>
+                    <li><a href="#reviews">Testimonials</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Gemology Guide</a></li>
+                    <li><a href="#">Certification Info</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#contact">Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Synthetic Gems. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Product Details</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img class="modal-product-image" id="modalImage" src="" alt="">
+                <h2 class="modal-product-name" id="modalName"></h2>
+                <p class="modal-product-type" id="modalType"></p>
+                <p class="modal-product-desc" id="modalDesc"></p>
+                <div class="modal-product-specs" id="modalSpecs"></div>
+                <div class="modal-product-price" id="modalPrice"></div>
+                <div class="modal-actions">
+                    <button class="btn-primary" onclick="addToInquiry()">
+                        Add to Inquiry
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </button>
+                    <button class="btn-secondary" onclick="closeModal()">Continue Browsing</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message" id="toastMessage">Item added to inquiry!</span>
+    </div>
+
+    <script>
+        // Product Data
+        const productData = {
+            ruby: {
+                name: 'Synthetic Ruby',
+                type: 'Verneuil Flame Fusion Process',
+                desc: 'Our synthetic rubies are grown using the time-tested Verneuil flame fusion method, producing stones with exceptional color saturation and clarity. Available in pigeon blood red to pinkish-red hues, these gemstones are ideal for high-end jewelry applications.',
+                image: 'https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/1161372ef-be17-4cb1-9d43-7790778d3735.png',
+                price: '$245 / carat',
+                specs: {
+                    'Hardness': '9.0 Mohs',
+                    'Refractive Index': '1.762 - 1.770',
+                    'Specific Gravity': '3.99 - 4.00',
+                    'Growth Method': 'Verneuil'
+                }
+            },
+            sapphire: {
+                name: 'Synthetic Sapphire',
+                type: 'Czochralski Pulling Method',
+                desc: 'Using the Czochralski pulling technique, our synthetic sapphires exhibit remarkable clarity and consistent color distribution. Available in cornflower blue, royal blue, and a spectrum of fancy colors including yellow, pink, and padparadscha.',
+                image: 'https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/1c42bedde-68bc-44c0-80d0-dc389f58b415.png',
+                price: '$320 / carat',
+                specs: {
+                    'Hardness': '9.0 Mohs',
+                    'Refractive Index': '1.762 - 1.770',
+                    'Specific Gravity': '3.95 - 4.03',
+                    'Growth Method': 'Czochralski'
+                }
+            },
+            emerald: {
+                name: 'Synthetic Emerald',
+                type: 'Flux Growth Process',
+                desc: 'Our flux-grown synthetic emeralds are among the most sought-after lab-created gemstones. The flux growth method produces stones with natural-looking characteristics including subtle inclusions, giving them the authentic appearance of Colombian emeralds.',
+                image: 'https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/1deb23d7f-ea43-41cd-9eca-363986822ef4.png',
+                price: '$480 / carat',
+                specs: {
+                    'Hardness': '7.5 - 8.0 Mohs',
+                    'Refractive Index': '1.577 - 1.583',
+                    'Specific Gravity': '2.65 - 2.78',
+                    'Growth Method': 'Flux'
+                }
+            },
+            diamond: {
+                name: 'Synthetic Diamond',
+                type: 'CVD & HPHT Methods',
+                desc: 'Our synthetic diamonds are grown using both Chemical Vapor Deposition (CVD) and High Pressure High Temperature (HPHT) methods. Each stone is chemically, physically, and optically identical to natural diamonds, available in colorless and fancy colors.',
+                image: 'https://image.qwenlm.ai/public_source/1aed55af-2f57-427a-80ef-818ea6200776/171054ae5-08c3-4767-8258-b97ee0d49dd8.png',
+                price: '$550 / carat',
+                specs: {
+                    'Hardness': '10.0 Mohs',
+                    'Refractive Index': '2.417',
+                    'Specific Gravity': '3.52',
+                    'Growth Method': 'CVD / HPHT'
+                }
+            }
+        };
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        function closeMobile() {
+            mobileToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Counter animation
+        const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.target);
+                    animateCounter(el, target);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(el => counterObserver.observe(el));
+
+        function animateCounter(el, target) {
+            const duration = 2000;
+            const start = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(eased * target);
+
+                if (target >= 1000) {
+                    el.textContent = current.toLocaleString() + '+';
+                } else {
+                    el.textContent = current + (target === 99 ? '%' : '+');
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        // Modal
+        function openModal(productKey) {
+            const product = productData[productKey];
+            if (!product) return;
+
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalImage').alt = product.name;
+            document.getElementById('modalName').textContent = product.name;
+            document.getElementById('modalType').textContent = product.type;
+            document.getElementById('modalDesc').textContent = product.desc;
+            document.getElementById('modalPrice').textContent = product.price;
+
+            const specsContainer = document.getElementById('modalSpecs');
+            specsContainer.innerHTML = '';
+            for (const [key, value] of Object.entries(product.specs)) {
+                specsContainer.innerHTML += `
+                    <div class="spec-item">
+                        <div class="spec-label">${key}</div>
+                        <div class="spec-value">${value}</div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('productModal')) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function addToInquiry() {
+            showToast('Product added to your inquiry list!');
+            closeModal();
+        }
+
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            showToast('Message sent successfully! We\'ll get back to you soon.');
+            e.target.reset();
+        }
+
+        // Sparkle Canvas
+        const canvas = document.getElementById('sparkle-canvas');
+        const ctx = canvas.getContext('2d');
+        let sparkles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Sparkle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.opacity = 0;
+                this.maxOpacity = Math.random() * 0.6 + 0.2;
+                this.fadeSpeed = Math.random() * 0.01 + 0.005;
+                this.fadeDirection = 1;
+                this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+                this.twinkleOffset = Math.random() * Math.PI * 2;
+            }
+
+            update(time) {
+                this.opacity += this.fadeSpeed * this.fadeDirection;
+                if (this.opacity >= this.maxOpacity) this.fadeDirection = -1;
+                if (this.opacity <= 0) {
+                    this.fadeDirection = 1;
+                    this.reset();
+                }
+
+                const twinkle = Math.sin(time * this.twinkleSpeed + this.twinkleOffset) * 0.3 + 0.7;
+                this.currentOpacity = this.opacity * twinkle;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.currentOpacity;
+                ctx.fillStyle = '#c9a96e';
+                ctx.beginPath();
+
+                // Draw 4-point star
+                const s = this.size;
+                ctx.moveTo(this.x, this.y - s * 2);
+                ctx.lineTo(this.x + s * 0.3, this.y - s * 0.3);
+                ctx.lineTo(this.x + s * 2, this.y);
+                ctx.lineTo(this.x + s * 0.3, this.y + s * 0.3);
+                ctx.lineTo(this.x, this.y + s * 2);
+                ctx.lineTo(this.x - s * 0.3, this.y + s * 0.3);
+                ctx.lineTo(this.x - s * 2, this.y);
+                ctx.lineTo(this.x - s * 0.3, this.y - s * 0.3);
+                ctx.closePath();
+                ctx.fill();
+
+                // Glow
+                ctx.globalAlpha = this.currentOpacity * 0.3;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, s * 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        // Initialize sparkles
+        for (let i = 0; i < 60; i++) {
+            sparkles.push(new Sparkle());
+        }
+
+        let sparkleTime = 0;
+        function animateSparkles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            sparkleTime++;
+            sparkles.forEach(sparkle => {
+                sparkle.update(sparkleTime);
+                sparkle.draw();
+            });
+            requestAnimationFrame(animateSparkles);
+        }
+
+        animateSparkles();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
